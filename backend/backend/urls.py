@@ -10,7 +10,8 @@ urlpatterns = [
 
         # Подключение URL адресов приложении
     path('authorize/', include('authorize.urls')),
+]
 
         # Подключение URL для доступа к медиа файлам
-    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
-]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
