@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django import forms
+
+from .models import User
 
 
 class SignInUserForm(AuthenticationForm):       # Форма авторизаций пользователя(Поля: логин, пароль)
