@@ -17,8 +17,8 @@
         </div>
         <div class="d-flex align-items-center">
             {% if request.user and request.user.is_authenticated %}
-                <span class="badge badge-light username">{{ request.user.username }}</span>
-                <a href="{% url 'authorize:user-signout' %}" class="btn btn-primary">Выйти</a>
+                <span class="badge badge-light username me-3">{{ request.user.username }}</span>
+                <a href="{% url 'authorize:user-signout' %}" class="btn btn-primary px-4">Выйти</a>
             {% else %}
             <a 
                 href="{% url 'authorize:user-signin' %}" 
@@ -34,7 +34,11 @@
     {% endblock %}
   
     {% block content %}
+    
     {% endblock %}
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'authorize/scripts/sendMessage.js' %}"></script>
 </body>
 </html>
