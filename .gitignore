@@ -24,3 +24,4 @@ local_settings.py
 
 /venv/
 /.venv/
+/backend/media/
