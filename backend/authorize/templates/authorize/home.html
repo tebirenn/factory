@@ -1,5 +1,9 @@
 {% extends 'authorize/base.html' %}
 
 {% block content %}
-<h1>Домашняя страница</h1>
+<div class="box base-padding">
+    <div class="box-title">
+        <h1>Здравствуйте, {{ user.first_name }}!</h1>
+    </div>
+</div>
 {% endblock %}

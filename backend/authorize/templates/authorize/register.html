@@ -1,0 +1,33 @@
+{% extends 'authorize/base.html' %}
+
+{% block content %}
+<div class="box base-padding d-flex flex-column align-items-center">
+    <div class="box-title">
+        <h1>{{ title }}</h1>
+    </div>
+
+    <form action="{% url 'authorize:user-signup' %}" method="POST" class="form mt-5">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <fieldset class="mb-3">
+                <label for="{{ field.id_for_label }}" class="mb-1">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <ul class="errors">
+                    {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </fieldset>
+        {% endfor %}      
+
+        <button type="submit" class="btn btn-primary mt-3 px-5 fw-bold">
+            Зарегистрироваться
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+
