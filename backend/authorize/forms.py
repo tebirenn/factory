@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 
@@ -10,13 +10,13 @@ class SignInUserForm(AuthenticationForm):       # Форма авторизац�
         fields = ('username', 'password')
 
     
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4 form-input',
+    username = forms.CharField(label='Логин:', widget=forms.TextInput(attrs={
+        'class': 'form-control py-1',
         'placeholder': 'Введите логин',
     }))
 
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control py-4 form-input',
+    password = forms.CharField(label='Пароль:', widget=forms.PasswordInput(attrs={
+        'class': 'form-control py-1',
         'placeholder': 'Введите пароль',
     }))
 
@@ -28,21 +28,22 @@ class SignUpUserForm(UserCreationForm):         # Форма регистрац�
         fields = ('first_name', 'username', 'password1', 'password2')
 
 
-    first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4 form-input',
+    first_name = forms.CharField(label='Имя:', widget=forms.TextInput(attrs={
+        'class': 'form-control py-1',
         'placeholder': 'Введите имя',
     }))
 
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4 form-input',
+    username = forms.CharField(label='Логин:', widget=forms.TextInput(attrs={
+        'class': 'form-control py-1',
+        'placeholder': 'Введите логин',
     }))
 
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control py-4 form-input',
+    password1 = forms.CharField(label='Пароль:', widget=forms.PasswordInput(attrs={
+        'class': 'form-control py-1',
         'placeholder': 'Придумайте пароль',
     }))
 
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control py-4 form-input',
+    password2 = forms.CharField(label='Подтвердите пароль:', widget=forms.PasswordInput(attrs={
+        'class': 'form-control py-1',
         'placeholder': 'Подтвердите пароль',
     }))
