@@ -3,9 +3,13 @@ from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from django.urls import reverse_lazy
 
 from .forms import *
+from .models import *
 
 
 @login_required(login_url='signin/', redirect_field_name=None)
@@ -44,6 +48,22 @@ class SignUpUser(CreateView):
         context['title'] = 'Регистрация'
 
         return context
+    
+
+class SetTgIdAPIView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request):
+        try: 
+            username = request.data['username']
+            tg_id = request.data['tg_id']
+
+            user = User.objects.get(username=username)
+            user.tg_id = tg_id
+            user.save()
+            return Response({'detail': 'success'}, status=200)
+        except:
+            return Response({'data': 'user not found'}, status=404)
     
 
 def signout_user(request):

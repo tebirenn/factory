@@ -9,4 +9,5 @@ urlpatterns = [
     path('signin/', views.SignInUser.as_view(), name='user-signin'),
     path('signup/', views.SignUpUser.as_view(), name='user-signup'),
     path('signout/', views.signout_user, name='user-signout'),
+    path('tgregister/', views.SetTgIdAPIView.as_view(), name='user-tg-register'),
 ]
