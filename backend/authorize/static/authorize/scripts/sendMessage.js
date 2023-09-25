@@ -1,5 +1,5 @@
 const formErrorDiv = document.getElementById('form-error');
-const URL = 'http://localhost:8000/authorize/send/';
+const URL = 'http://159.89.4.57/authorize/send/';
 
 const sendMessage = () => {
     const token = localStorage.getItem('access');

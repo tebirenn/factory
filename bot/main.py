@@ -28,7 +28,7 @@ def register_user(message: types.Message):
     try:
         username = message.text.split()[1]
         try:
-            url = 'http://localhost:8000/authorize/tgregister/'
+            url = 'http://159.89.4.57/authorize/tgregister/'
             data = {'username': username, 'tg_id': message.from_user.id}
             response = requests.post(url, data=data)
 
@@ -50,7 +50,7 @@ def send_id(message: types.Message):
 
 @bot.message_handler(commands=['site'])
 def site(message: types.Message):
-    webbrowser.open('http:localhost:8000/authorize')
+    webbrowser.open('http://159.89.4.57/authorize')
 
 
 if __name__ == '__main__':

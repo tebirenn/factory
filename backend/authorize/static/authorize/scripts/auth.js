@@ -27,7 +27,7 @@ const regUser = (event) => {
 
     axios.post(userCreateAndGetURL, {username, first_name, password: password1}, {headers: {'X-CSRFToken': csrfToken,}})
     .then((data) => {
-        location.replace('http://159.89.4.57/authorize/signin/');
+        location.replace('/authorize/signin/');
     })
     .catch((error) => {
         if (error.response.data.username) {
@@ -48,7 +48,7 @@ const authUser = (event) => {
     .then((data) => {
         localStorage.setItem('access', data.data.access);
         localStorage.setItem('refresh', data.data.refresh);
-        location.replace('http://159.89.4.57/authorize/');
+        location.replace('/authorize/');
     });
 }
 
@@ -82,7 +82,7 @@ const getUserData = () => {
                 class="btn btn-light px-4 fw-bold"
             >Зарегистрироваться</a>
         `
-        location.replace('http://159.89.4.57/authorize/signin/');
+        location.replace('/authorize/signin/');
     });
 }
 
@@ -102,7 +102,7 @@ const checkUser = () => {
         'http://159.89.4.57/authorize/api/token/verify/',
         {token}
     ).then((data) => {
-        location.replace('http://159.89.4.57/authorize/');
+        location.replace('/authorize/');
     }).catch((error) => {
         document.getElementById('header-left').innerHTML = `
             <a 
