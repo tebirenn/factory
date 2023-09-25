@@ -11,13 +11,13 @@
     width: 100%;
 }
 .form label {
-    font-size: 18px;
+    font-size: 16px;
 }
 .form button {
-    font-size: 18px;
+    font-size: 16px;
 }
 .form-control {
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .errors {
@@ -28,4 +28,8 @@
 .errors li,.error {
     font-size: 13px;
     color: #f50;
+}
+
+#form-error-reg {
+    width: 40%;
 }
