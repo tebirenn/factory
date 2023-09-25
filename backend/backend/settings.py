@@ -1,12 +1,13 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
+
+load_dotenv('../.env')
 
 try:
     from .local_settings import *
-    from dotenv import load_dotenv
-
-    load_dotenv('../.env')
+    
 except:
     from .prod_settings import *
 
