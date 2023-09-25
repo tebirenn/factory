@@ -6,7 +6,7 @@
         <h1>{{ title }}</h1>
     </div>
 
-    <form action="{% url 'authorize:user-signin' %}" method="POST" class="form mt-5">
+    <form onsubmit="authUser(event)" class="form mt-5">
         {% csrf_token %}
         {% for field in form %}
             <fieldset class="mb-3">
@@ -30,4 +30,8 @@
         </button>
     </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>checkUser()</script>
 {% endblock %}

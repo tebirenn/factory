@@ -3,37 +3,33 @@
 {% block content %}
 <div class="box base-padding">
     <div class="box-title">
-        <h1>Здравствуйте, {{ user.first_name }}!</h1>
+        <h1>Здравствуйте, <span id="home-user-first-name"></span>!</h1>
     </div>
     <div class="box base-padding">
         <div> 
+            {% csrf_token %}
             <h3 class="mb-5">Отправить сообщение:</h3>
-            {% if not user.tg_id %}
-            <p class="alert alert-warning">
+            <p class="alert alert-warning" style="display: none;" id="tg-error">
                 Отправить сообщение возможно только после регистраций в <a href="https://t.me/factory_messenger_bot" target="_blank">телеграмм боте</a>
             </p>
-            {% endif %}
             <div id="form-error"></div>
             <input type="hidden" id="userTgId" value="{{ user.tg_id }}">
             <input type="hidden" id="userUsername" value="{{ user.username }}">
 
-            <textarea 
-                id="messageText" 
-                class="form-control mt-1 mb-3" 
-                placeholder="Написать сообщение"
-                {% if not user.tg_id %}
-                disabled
-                {% endif %}
-            ></textarea>
+            <textarea id="messageText" class="form-control mt-1 mb-3" placeholder="Написать сообщение" ></textarea>
 
             <button 
                 onclick="sendMessage()" 
                 class="btn btn-primary px-5"
-                {% if not user.tg_id %}
-                disabled
-                {% endif %}
+                id="sendMButton"
             >Отправить</button>
         </div>
     </div>
 </div>
+
+<script></script>
+{% endblock %}
+
+{% block scripts %}
+<script>getUserData()</script>
 {% endblock %}
