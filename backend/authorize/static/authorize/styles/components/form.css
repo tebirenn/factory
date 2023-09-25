@@ -33,3 +33,10 @@
 #form-error-reg {
     width: 40%;
 }
+
+@media screen and (max-width: 767px) {
+    .form {
+        width: 100%;
+    }
+    
+}

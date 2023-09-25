@@ -28,3 +28,22 @@
 .box-title h1 {
     text-align: center;
 }
+
+
+@media screen and (max-width: 767px) {
+    .base-padding {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .logo {
+        font-size: 18px;
+    }
+
+    #header-left a {
+        font-size: 10px;
+    }
+    .px-4 {
+        padding-left: 0.5rem!important;
+        padding-right: 0.5rem!important;
+    }
+}
