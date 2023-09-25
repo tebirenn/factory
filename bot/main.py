@@ -50,6 +50,7 @@ def send_id(message: types.Message):
 
 @bot.message_handler(commands=['site'])
 def site(message: types.Message):
+    bot.send_message(message.chat.id, 'Посетите наш веб-сайт <a href="http://159.89.4.57/authorize">здесь</a>', parse_mode='html')
     webbrowser.open('http://159.89.4.57/authorize')
 
 
