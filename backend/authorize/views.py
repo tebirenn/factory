@@ -3,22 +3,28 @@ from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from rest_framework import mixins
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.decorators import api_view, permission_classes
 from django.urls import reverse_lazy
+import os
+import requests
 
 from .forms import *
 from .models import *
+from .serializers import *
 
 
-@login_required(login_url='signin/', redirect_field_name=None)
-def home(request):
-    context = {
-        'title': 'Factory'
-    }
-
-    return render(request, 'authorize/home.html', context=context)
+class HomeAPIView(APIView):
+    def get(self, request):
+        context = {
+            'title': 'Factory',
+        }
+        return render(request, 'authorize/home.html', context=context)
 
 
 class SignInUser(LoginView):
@@ -51,8 +57,6 @@ class SignUpUser(CreateView):
     
 
 class SetTgIdAPIView(APIView):
-    permission_classes = (IsAuthenticated, )
-
     def post(self, request):
         try: 
             username = request.data['username']
@@ -63,8 +67,51 @@ class SetTgIdAPIView(APIView):
             user.save()
             return Response({'detail': 'success'}, status=200)
         except:
-            return Response({'data': 'user not found'}, status=404)
+            return Response({'detail': 'user not found'}, status=404)
+        
+
+class SendMessageAPIView(APIView):
+
+    def post(self, request):
+        try:
+            username = request.user.username
+            tg_id = request.user.tg_id
+            if not tg_id:
+                return Response({'detail': 'set telegtam id'}, status=404)
+
+            message_text = request.data['messageText']
+            URL = f'https://api.telegram.org/bot{os.environ.get("BOT_TOKEN")}/sendMessage'
+            bot_message = f'<b>{username}</b>, я получил от тебя сообщение:\n\n{message_text}'
+
+            requests.post(URL, {'parse_mode': 'html', 'chat_id': tg_id, 'text': bot_message})
+
+            return Response({'detail': 'Message sended'}, status=200)
+        except:
+            return Response({'detail': 'Message send error'}, status=404)
     
+
+class UserDetailAPIView(RetrieveAPIView):
+    
+    def get_queryset(self):
+        return User.objects.get(id=self.request.user.id)
+    
+class UserViewSet(GenericViewSet, mixins.CreateModelMixin, ):
+    def get_queryset(self):
+        if self.action == 'retrieve':
+            return User.objects.get(id=self.request.user.id)
+        return User.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return UserCreateSerializer
+        elif self.action == 'retrieve':
+            return UserRetrieveSerializer
+        
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_queryset()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
 
 def signout_user(request):
     logout(request)
