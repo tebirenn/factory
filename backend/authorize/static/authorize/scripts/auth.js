@@ -1,5 +1,5 @@
-const userCreateAndGetURL = 'http://localhost:8000/authorize/api/token/user/';
-const authURL = 'http://localhost:8000/authorize/api/token/';
+const userCreateAndGetURL = 'http://159.89.4.57/authorize/api/token/user/';
+const authURL = 'http://159.89.4.57/authorize/api/token/';
 const formErrorDivReg = document.getElementById('form-error-reg');
 
 
@@ -27,7 +27,7 @@ const regUser = (event) => {
 
     axios.post(userCreateAndGetURL, {username, first_name, password: password1}, {headers: {'X-CSRFToken': csrfToken,}})
     .then((data) => {
-        location.replace('http://localhost:8000/authorize/signin/');
+        location.replace('http://159.89.4.57/authorize/signin/');
     })
     .catch((error) => {
         if (error.response.data.username) {
@@ -48,7 +48,7 @@ const authUser = (event) => {
     .then((data) => {
         localStorage.setItem('access', data.data.access);
         localStorage.setItem('refresh', data.data.refresh);
-        location.replace('http://localhost:8000/authorize/');
+        location.replace('http://159.89.4.57/authorize/');
     });
 }
 
@@ -82,7 +82,7 @@ const getUserData = () => {
                 class="btn btn-light px-4 fw-bold"
             >Зарегистрироваться</a>
         `
-        location.replace('http://localhost:8000/authorize/signin/');
+        location.replace('http://159.89.4.57/authorize/signin/');
     });
 }
 
@@ -99,10 +99,10 @@ const checkUser = () => {
     const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
     
     axios.post(
-        'http://localhost:8000/authorize/api/token/verify/',
+        'http://159.89.4.57/authorize/api/token/verify/',
         {token}
     ).then((data) => {
-        location.replace('http://localhost:8000/authorize/');
+        location.replace('http://159.89.4.57/authorize/');
     }).catch((error) => {
         document.getElementById('header-left').innerHTML = `
             <a 
@@ -116,3 +116,5 @@ const checkUser = () => {
         `
     });
 }
+
+
