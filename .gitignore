@@ -1,6 +1,5 @@
 *.pyc
 *.pyo
-*.log
 *.pot
 *.pyc
 **/__pycache__/
