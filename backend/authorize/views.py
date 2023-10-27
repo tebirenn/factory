@@ -22,7 +22,7 @@ from .serializers import *
 class HomeAPIView(APIView):
     def get(self, request):
         context = {
-            'title': 'Factory',
+            'title': 'TaskFusion',
         }
         return render(request, 'authorize/home.html', context=context)
 
